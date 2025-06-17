@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Greeting</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Glowing nose pulse */
+        .nose-hitbox {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            top: 72%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 0, 0, 0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            animation: nosePulse 1.2s infinite;
+            z-index: 3;
+        }
+
+        @keyframes nosePulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 5px red;
+            }
+
+            50% {
+                box-shadow: 0 0 15px red;
+            }
+        }
+
+        /* Glowing birthday text */
+        .birthday-banner h1 {
+            animation: glowText 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowText {
+            from {
+                text-shadow: 0 0 10px #f09, 0 0 20px #f6c, 0 0 30px #f9f;
+            }
+
+            to {
+                text-shadow: 0 0 20px #f9c, 0 0 35px #f0f, 0 0 50px #fcf;
+            }
+        }
+
+        .corner {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- STEP 1 -->
+    <div class="intro-screen">
+        <!-- Floating Greeting Text -->
+        <div class="floating-hi-text">Hi Prachi! 💖</div>
+
+        <!-- Sparkle Particles -->
+        <div class="sparkle-container"></div>
+
+        <!-- Puppy Image -->
+        <img src="dog.png" class="puppy" alt="Cute Puppy" />
+
+        <!-- Clickable Nose Area -->
+        <div class="nose-hitbox"></div>
+
+        <!-- Puppy Dialog Box -->
+        <div class="puppy-dialog"></div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div id="step2-scene" style="display: none;">
+        <div class="sparkle-container"></div>
+        <div class="hearts-container"></div>
+        <!-- Center Party Popper -->
+        <div class="party-popper center-popper" id="center-popper"></div>
+
+        <!-- Banner with Cat on Top -->
+        <div class="birthday-banner">
+            <img src="cat11.png" alt="Cat" class="cat-on-text" />
+            <h1>Happy Birthday Prachi (Mithi)! 🎉🎂</h1>
+        </div>
+
+        <!-- Optional Confetti Corners (disabled with .corner) -->
+        <div class="party-popper corner top-left"></div>
+        <div class="party-popper corner top-right"></div>
+        <div class="party-popper corner bottom-left"></div>
+        <div class="party-popper corner bottom-right"></div>
+
+        <!-- Continue Message -->
+        <p id="continue-message" style="display: none; font-size: 1.2rem; color: #a20056; margin-top: 30px;">
+            Tap anywhere to continue 🎁
+        </p>
+    </div>
+
+    <!-- Music -->
+    <audio id="birthday-music-1" src="music3.mp3" auto"></audio>
+    <audio id="birthday-music-2" src="music2.mp3" preload="auto"></audio>
+
+    <div class="sparkle-container"></div>
+    <div class="hearts-container"></div>
+
+
+    <!-- STEP 3: LETTER + PHOTO COLLAGE SCENE -->
+    <div id="step3-scene" style="display: none;">
+        <div class="split-container upgraded-final">
+            <!-- Left: Letter Panel -->
+            <div class="letter-side upgraded-letter">
+                <div class="letter-overlay"></div>
+                <div class="letter-box upgraded-box">
+                    <h2 class="letter-heading">My Letter To You</h2>
+                    <div id="letter-content" class="typewriter-text"></div>
+                    <p class="signature">Love,<br>Shubham 💐</p>
+                </div>
+            </div>
+
+            <!-- Right: Collage with Watermark Tuberose -->
+            <div class="collage-side slideshow-side">
+                <div class="photo-slideshow">
+                    <img src="image1.jpg" class="slideshow-image active" />
+                    <img src="im10.jpg" Slideshow Image" class="slideshow-image" />
+                    <img src="im9.jpg" class="slideshow-image" />
+                    <img src="iamge4.jpg" class="slideshow-image" />
+                    <img src="im6.jpg" Slideshow Image" class="slideshow-image" />
+                    <img src="im8.jpg" Slideshow Image" class="slideshow-image" />
+                    <img src="image5.jpg" class="slideshow-image" />
+                    <img src="iamge3.jpg" class="slideshow-image" />
+                    <img src="im7.jpg" Slideshow Image" class="slideshow-image" />
+                    <img src="im11.JPG" Slideshow Image" class="slideshow-image" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional soft background music -->
+        <audio id="step3-music" src="song2.mp3" type="audio/mpeg" autoplay loop></audio>
+
+        <!-- Floating hearts and sparkles -->
+        <div class="hearts-container"></div>
+        <div class="sparkle-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>
