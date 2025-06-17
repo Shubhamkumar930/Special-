@@ -1,0 +1,972 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: url('sky.jpg') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.intro-screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* 🐶 Puppy Entrance */
+.puppy {
+    position: absolute;
+    width: 260px;
+    left: 50%;
+    bottom: 100px;
+    transform: translateX(-50%);
+    animation: walkIn 6s ease-out forwards;
+}
+
+@keyframes walkIn {
+    0% {
+        transform: translateX(-50%) scale(0.3);
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* 💬 Puppy Dialog */
+.puppy-dialog {
+    position: absolute;
+    bottom: 340px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(145deg, #ffd6f5, #ffe6fb);
+    color: #a20056;
+    padding: 18px 30px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 30px;
+    border: 3px solid #ffc0f0;
+    box-shadow: 0 0 20px rgba(255, 153, 204, 0.6);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* 🖱️ Nose Click */
+.nose-hitbox {
+    position: absolute;
+    top: 66.38%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+/* 🎉 STEP 2 Scene */
+/* 🌈 Step 2 Scene Background */
+#step2-scene {
+    display: none;
+    /* shown dynamically with JS */
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 10;
+
+    /* Gradient Background */
+    background: linear-gradient(-45deg, #e0f7ff, #cceeff, #a8d8f8, #cceeff);
+    background-size: 400% 400%;
+    animation: bgShift 20s ease infinite;
+
+    /* Optional Centering */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 🌊 Background Animation */
+@keyframes bgShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 🎂 Birthday Banner */
+.birthday-banner {
+    position: relative;
+    text-align: center;
+    font-size: 3rem;
+    color: #c7008f;
+    font-family: "Comic Sans MS", cursive;
+    animation: popUp 1s ease-out;
+}
+
+.birthday-banner h1 {
+    animation: glowText 2s ease-in-out infinite alternate;
+}
+
+@keyframes glowText {
+    from {
+        text-shadow: 0 0 10px #f09, 0 0 20px #f6c, 0 0 30px #f9f;
+    }
+
+    to {
+        text-shadow: 0 0 20px #f9c, 0 0 35px #f0f, 0 0 50px #fcf;
+    }
+}
+
+/* 🐱 Cat on Banner */
+.cat-on-text {
+    position: absolute;
+    top: -290px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    height: auto;
+}
+
+/* 🎊 Party Poppers */
+.party-popper {
+    width: 180px;
+    height: 180px;
+    background-image: url("blooper2.gif");
+    background-size: cover;
+    position: absolute;
+}
+
+.center-popper {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.corner.top-left {
+    top: 20px;
+    left: 20px;
+}
+
+.corner.top-right {
+    top: 20px;
+    right: 20px;
+}
+
+.corner.bottom-left {
+    bottom: 20px;
+    left: 20px;
+}
+
+.corner.bottom-right {
+    bottom: 20px;
+    right: 20px;
+}
+
+.corner {
+    display: none !important;
+}
+
+/* 💖 Floating "Hi" Text */
+.floating-hi-text {
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff69b4;
+    text-shadow: 0 0 10px #ffb6c1;
+    opacity: 0;
+    animation: fadeBounce 5s ease-in-out forwards;
+    font-family: "Comic Sans MS", cursive;
+    z-index: 5;
+}
+
+@keyframes fadeBounce {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+}
+
+.sparkle-container,
+.hearts-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 20;
+    /* On top of everything */
+}
+
+/* ✨ Sparkles */
+.sparkle-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.sparkle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #c42c2c;
+    box-shadow: 0 0 8px #d75615, 0 0 15px #ff00cc;
+    animation: sparkleMove 8s linear infinite, sparkleGlow 2s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+@keyframes sparkleMove {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
+
+@keyframes sparkleGlow {
+    0% {
+        background: #ff00cc;
+        box-shadow: 0 0 8px #ff00cc, 0 0 15px #ff00cc;
+    }
+
+    25% {
+        background: #00ffff;
+        box-shadow: 0 0 8px #00ffff, 0 0 15px #00ffff;
+    }
+
+    50% {
+        background: #33ff00;
+        box-shadow: 0 0 8px #33ff00, 0 0 15px #33ff00;
+    }
+
+    75% {
+        background: #ffcc00;
+        box-shadow: 0 0 8px #ffcc00, 0 0 15px #ffcc00;
+    }
+
+    100% {
+        background: #ff00cc;
+        box-shadow: 0 0 8px #ff00cc, 0 0 15px #ff00cc;
+    }
+}
+
+/* ❤️ Hearts (Background Animation) */
+.hearts-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: pink;
+    transform: rotate(45deg);
+    animation: floatUp 5s linear infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: pink;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -10px;
+    left: 0;
+}
+
+.heart::after {
+    left: -10px;
+    top: 0;
+}
+
+@keyframes floatUp {
+    0% {
+        bottom: -20px;
+        opacity: 0;
+        transform: translateX(0) rotate(45deg);
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        bottom: 100%;
+        opacity: 0;
+        transform: translateX(-50px) rotate(45deg);
+    }
+}
+
+
+@keyframes sparkle-float {
+    0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-10vh) scale(1);
+        opacity: 0;
+    }
+}
+
+
+#step3-scene {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right, #fff0f5, #e0f7fa);
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    font-family: "Comic Sans MS", cursive;
+    overflow: hidden;
+    animation: bgFadeIn 2s ease-in;
+}
+
+@keyframes bgFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(1.02);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.split-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* ✉️ Letter Section */
+.letter-side {
+    flex: 1;
+    background: url('flam1.jpg') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.letter-content {
+    position: relative;
+    z-index: 3;
+    padding: 40px;
+    height: 100%;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.55);
+    /* ← this is the key blend */
+    backdrop-filter: blur(2px);
+    /* ← dreamy look without killing text readability */
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(255, 200, 220, 0.3);
+}
+
+.letter-box::before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    width: 200px;
+    height: 200px;
+    background-image: url('flower2.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+    transform: rotate(-15deg);
+    z-index: 1;
+}
+
+.letter-side::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.85), transparent);
+    z-index: 2;
+    pointer-events: none;
+}
+
+
+.letter-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 35px;
+    border-radius: 20px;
+    max-height: 70vh;
+    max-width: 500px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    color: #c7008f;
+    font-size: 1.3rem;
+    animation: fadeInSlide 1.5s ease-in-out;
+    min-height: 300px;
+    overflow-y: auto;
+    /* enables vertical scroll */
+    padding-right: 10px;
+    /* space for scrollbar */
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: #ffc0cb transparent;
+    /* optional: pink scrollbar */
+}
+
+.letter-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.letter-box::-webkit-scrollbar-thumb {
+    background-color: #ffc0cb;
+    border-radius: 10px;
+}
+
+.letter-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.letter-heading {
+    font-size: 1.8rem;
+    color: #e91e63;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ✍️ Signature */
+.signature {
+    margin-top: 30px;
+    text-align: right;
+    font-size: 1.2rem;
+    color: #ad1457;
+}
+
+/* ✨ Animated Glow Border */
+.glow-border {
+    border: 2px solid #ffcce0;
+    box-shadow: 0 0 20px rgba(255, 182, 193, 0.7);
+    transition: box-shadow 0.5s ease-in-out;
+}
+
+
+/* 📷 Photo Collage Right */
+/* 🌸 Background flower in collage */
+.slideshow-side {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, pink, #f46ad3);
+    /* Lighter blend */
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Container holding all slideshow images */
+.photo-slideshow {
+    position: relative;
+    width: 75%;
+    height: 80%;
+    border-radius: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 2;
+}
+
+.slideshow-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.slideshow-item.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Individual image styles */
+.slideshow-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 30px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 1;
+
+    /* Blending edges using a mask */
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
+    mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+/* 🌸 Caption Styling */
+.caption {
+    position: absolute;
+    bottom: 30px;
+    padding: 14px 24px;
+    background: rgba(255, 255, 255, 0.75);
+    color: #c7008f;
+    font-size: 1.2rem;
+    font-family: "Comic Sans MS", cursive;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    max-width: 80%;
+    animation: fadeCaption 1s ease-in-out;
+}
+
+@keyframes fadeCaption {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* The visible one */
+.slideshow-image.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.slideshow-side::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.85), transparent);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Subtle tuberose decoration in background */
+.slideshow-side::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("tuberose.png") no-repeat center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    opacity: 0.3;
+    z-index: 3;
+    pointer-events: none;
+    filter: blur(1px);
+}
+
+.photo-collage {
+    position: relative;
+    z-index: 2;
+    /* Keep collage above the overlay */
+}
+
+/* 📸 Polaroid Style Frames */
+.photo-frame {
+    background: white;
+    padding: 10px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transform: rotate(0deg);
+    transition: transform 0.4s ease;
+}
+
+.photo-frame img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Subtle random rotation */
+.rotate-left {
+    transform: rotate(-4deg);
+}
+
+.rotate-right {
+    transform: rotate(4deg);
+}
+
+/* 💌 Typewriter Text */
+.typewriter-text {
+    white-space: pre-line;
+    overflow: hidden;
+    min-height: 180px;
+    line-height: 1.6;
+    color: #d81b60;
+    font-weight: 500;
+}
+
+/* 🌸 Glowing Floating Tuberose */
+.float-glow {
+    animation: floatUpDown 3s ease-in-out infinite, flowerGlow 3s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes floatUpDown {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes flowerGlow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 8px #ec78d1);
+    }
+
+    50% {
+        filter: drop-shadow(0 0 15px #ea4d8f);
+    }
+}
+
+/* 🖼️ Photo Collage Frame */
+.photo-frame {
+    background: #d3d3d3;
+    padding: 6px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    animation: popIn 0.8s ease forwards;
+    opacity: 0;
+}
+
+.photo-frame:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.photo-frame:nth-child(2) {
+    animation-delay: 0.6s;
+}
+
+.photo-frame:nth-child(3) {
+    animation-delay: 0.9s;
+}
+
+.photo-frame:nth-child(4) {
+    animation-delay: 1.2s;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Smooth fade */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* 🌸 Petal Animation */
+.petal-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.petal {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-image: url('flower2.jpg');
+    background-size: cover;
+    animation: fall 10s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10%) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ✨ Twinkling Stars */
+.star-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.star {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 8px white;
+    animation: twinkle 3s ease-in-out infinite;
+    opacity: 0.7;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+/* 💖 Bubble Hearts (emotional burst) */
+.bubble-heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: pink;
+    transform: rotate(45deg);
+    animation: bubbleRise 6s ease-out forwards;
+    opacity: 0.8;
+    z-index: 7;
+}
+
+.bubble-heart::before,
+.bubble-heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: pink;
+    border-radius: 50%;
+}
+
+.bubble-heart::before {
+    top: -10px;
+    left: 0;
+}
+
+.bubble-heart::after {
+    left: -10px;
+    top: 0;
+}
+
+@keyframes bubbleRise {
+    0% {
+        bottom: 0;
+        transform: translateY(0) scale(0.5);
+        opacity: 1;
+    }
+
+    100% {
+        bottom: 100%;
+        transform: translateY(-100px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* 🌟 Glowing Gradient Divider Between Letter and Collage */
+.split-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* ✨ Vertical Glow Line Separator */
+.split-container::before {
+    content: "";
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    left: 50%;
+    width: 6px;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, #ff85c1, #ffd6f5, #ff85c1);
+    box-shadow: 0 0 12px #ffb6d9, 0 0 18px #ff69b4;
+    z-index: 10;
+    border-radius: 5px;
+    animation: glowPulse 3s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+/* 🌈 Smooth glowing pulse */
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 12px #ffb6d9, 0 0 18px #ff69b4;
+        opacity: 1;
+    }
+
+    50% {
+        box-shadow: 0 0 18px #ff85c1, 0 0 28px #ffcce6;
+        opacity: 0.6;
+    }
+}
+
+@keyframes fadeInStep3 {
+    0% {
+        opacity: 0;
+        transform: scale(0.98);
+        filter: blur(4px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+.fade-in-step3 {
+    animation: fadeInStep3 1.8s ease-out forwards;
+}
+
+
+@media (max-width: 768px) {
+    .split-container {
+        flex-direction: column;
+    }
+
+    .letter-side,
+    .slideshow-side {
+        width: 100%;
+        height: auto;
+    }
+
+    .letter-box {
+        max-height: 60vh;
+        font-size: 0.95rem;
+    }
+
+    .caption {
+        font-size: 0.9rem;
+    }
+
+    .puppy-dialog {
+        font-size: 1rem;
+    }
+
+    .birthday-banner h1 {
+        font-size: 1.5rem;
+    }
+}
